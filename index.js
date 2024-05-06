@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express()
 const db = require('./config/db');
 const authRoutes = require('./routes/authroutes');
@@ -17,6 +18,9 @@ db.then(() => {
 .catch((err) => {
     console.log(err);
 });
+
+// Use CORS middleware
+app.use(cors());
 
 // Routes
 app.use('/auth', authRoutes);
