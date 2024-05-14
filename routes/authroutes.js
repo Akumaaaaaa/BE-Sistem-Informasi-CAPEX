@@ -53,10 +53,10 @@ router.post('/login', async (req, res) => {
         }
 
         // Create and assign a token
-        const token = jwt.sign({ _id: user._id, email: user.email }, process.env.TOKEN_SECRET);
+        const token = jwt.sign({ _id: user._id, email: user.email, role: user.role }, process.env.TOKEN_SECRET);
         
-        // Return token and user ID in response
-        res.json({ token, userId: user._id });
+        // Return token, user ID, and role in response
+        res.json({ token, userId: user._id, role: user.role });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
