@@ -1,12 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const app = express()
+const app = express();
 const db = require('./config/db');
 const authRoutes = require('./routes/authroutes');
+const dataRoutes = require('./routes/dataroutes');
 const authMiddleware = require('./middlewares/authmiddleware');
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
-app.use(express.json())
+app.use(express.json());
 
 // Connect to MongoDB
 db.then(() => {
@@ -24,6 +25,4 @@ app.use(cors());
 
 // Routes
 app.use('/auth', authRoutes);
-
-// Middleware to validate tokens
-app.use(authMiddleware);
+app.use('/data', authMiddleware, dataRoutes);
