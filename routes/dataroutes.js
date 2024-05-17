@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Middleware to authenticate the user and check for admin role
 const authenticateAdmin = (req, res, next) => {
-    const token = req.headers['authorization'];
+    const token = req.header('Authorization').replace('Bearer ', '');
     if (!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });
     }
