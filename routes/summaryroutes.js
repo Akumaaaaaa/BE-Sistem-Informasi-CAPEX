@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Summary = require('../models/summary');
-const authMiddleware = require('../middlewares/authmiddleware');
 
 // Create a summary (Only admin)
-router.post('/summaries', authMiddleware, async (req, res) => {
-    console.log("POST request received at /summaries");
+router.post('/summaries', async (req, res) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Access Denied: Only admin can perform this action' });
     }
@@ -13,17 +11,15 @@ router.post('/summaries', authMiddleware, async (req, res) => {
     try {
         const summary = new Summary(req.body);
         await summary.save();
-        console.log("Summary created:", summary);
         res.status(201).json(summary);
     } catch (error) {
-        console.error("Error creating summary:", error);
         res.status(400).json({ message: error.message });
     }
 });
 
 
 // Read all summaries (Authenticated users)
-router.get('/summaries', authMiddleware, async (req, res) => {
+router.get('/summaries', async (req, res) => {
     try {
         const summaries = await Summary.find();
         res.json(summaries);
@@ -33,7 +29,7 @@ router.get('/summaries', authMiddleware, async (req, res) => {
 });
 
 // Update a summary (Only admin)
-router.put('/summaries/:id', authMiddleware, async (req, res) => {
+router.put('/summaries/:id', async (req, res) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Access Denied: Only admin can perform this action' });
     }
@@ -52,7 +48,7 @@ router.put('/summaries/:id', authMiddleware, async (req, res) => {
 });
 
 // Delete a summary (Only admin)
-router.delete('/summaries/:id', authMiddleware, async (req, res) => {
+router.delete('/summaries/:id', async (req, res) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Access Denied: Only admin can perform this action' });
     }
