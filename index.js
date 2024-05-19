@@ -5,6 +5,7 @@ const db = require('./config/db');
 const authRoutes = require('./routes/authroutes');
 const dataRoutes = require('./routes/dataroutes');
 const summaryRoutes = require('./routes/summaryroutes')
+const pekanRoutes = require('./routes/pekanroutes');
 const authMiddleware = require('./middlewares/authmiddleware');
 const PORT = process.env.PORT || 3000;
 
@@ -27,4 +28,5 @@ app.use(cors());
 // Routes
 app.use('/auth', authRoutes);
 app.use('/summary', summaryRoutes);
+app.use('/pekan', pekanRoutes);
 app.use('/data', authMiddleware, dataRoutes);
