@@ -21,9 +21,7 @@ db.then(() => {
 });
 
 // Use CORS middleware
-app.use(cors({
-    origin: 'http://localhost:5173'
-  }));
+app.use(cors());
 
 // Routes
 app.use('/auth', authRoutes);
