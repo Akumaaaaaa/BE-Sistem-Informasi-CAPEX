@@ -5,6 +5,7 @@ const authMiddleware = require('../middlewares/authmiddleware');
 
 // Create a summary (Only admin)
 router.post('/summaries', authMiddleware, async (req, res) => {
+    console.log("POST request received at /summaries");
     if (req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Access Denied: Only admin can perform this action' });
     }
@@ -12,11 +13,14 @@ router.post('/summaries', authMiddleware, async (req, res) => {
     try {
         const summary = new Summary(req.body);
         await summary.save();
+        console.log("Summary created:", summary);
         res.status(201).json(summary);
     } catch (error) {
+        console.error("Error creating summary:", error);
         res.status(400).json({ message: error.message });
     }
 });
+
 
 // Read all summaries (Authenticated users)
 router.get('/summaries', authMiddleware, async (req, res) => {
