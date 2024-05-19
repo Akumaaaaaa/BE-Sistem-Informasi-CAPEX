@@ -4,6 +4,7 @@ const app = express();
 const db = require('./config/db');
 const authRoutes = require('./routes/authroutes');
 const dataRoutes = require('./routes/dataroutes');
+const summaryRoutes = require('./routes/summaryroutes')
 const authMiddleware = require('./middlewares/authmiddleware');
 const PORT = process.env.PORT || 3000;
 
@@ -25,4 +26,5 @@ app.use(cors());
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/summary', summaryRoutes);
 app.use('/data', authMiddleware, dataRoutes);
