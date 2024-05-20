@@ -3,6 +3,15 @@ const router = express.Router();
 const Pekan = require('../models/pekan');
 const authMiddleware = require('../middlewares/authmiddleware');
 
+// Helper function to format date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+}
+
 // Create a Pekan
 router.post('/', authMiddleware, async (req, res) => {
     if (req.user.role !== 'admin') {
@@ -10,34 +19,14 @@ router.post('/', authMiddleware, async (req, res) => {
     }
 
     try {
-        const pekan = new Pekan(req.body);
+        const tanggal_pertama = formatDate(req.body.tanggal_pertama);
+        const tanggal_kedua = formatDate(req.body.tanggal_kedua);
+
+        const pekan = new Pekan({ tanggal_pertama, tanggal_kedua });
         await pekan.save();
         res.status(201).json(pekan);
     } catch (error) {
         res.status(400).json({ message: error.message });
-    }
-});
-
-// Read all Pekan
-router.get('/', authMiddleware, async (req, res) => {
-    try {
-        const pekan = await Pekan.find();
-        res.json(pekan);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
-// Read a single Pekan
-router.get('/:id', authMiddleware, async (req, res) => {
-    try {
-        const pekan = await Pekan.findById(req.params.id);
-        if (!pekan) {
-            return res.status(404).json({ message: 'Pekan not found' });
-        }
-        res.json(pekan);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
     }
 });
 
@@ -48,11 +37,17 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
 
     try {
+        const tanggal_pertama = formatDate(req.body.tanggal_pertama);
+        const tanggal_kedua = formatDate(req.body.tanggal_kedua);
+
         const pekan = await Pekan.findById(req.params.id);
         if (!pekan) {
             return res.status(404).json({ message: 'Pekan not found' });
         }
-        Object.assign(pekan, req.body);
+        
+        pekan.tanggal_pertama = tanggal_pertama;
+        pekan.tanggal_kedua = tanggal_kedua;
+        
         await pekan.save();
         res.json(pekan);
     } catch (error) {
