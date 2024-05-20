@@ -2,12 +2,18 @@ const mongoose = require('mongoose');
 
 const pekanSchema = new mongoose.Schema({
     tanggal_pertama: {
-        type: Date,
-        required: true
+        type: String,
+        required: true,
+        set: function(value) {
+          return value ? value.split('/').reverse().join('-') : value;
+        }
     },
     tanggal_kedua: {
-        type: Date,
-        required: true
+        type: String,
+        required: true,
+        set: function(value) {
+          return value ? value.split('/').reverse().join('-') : value;
+        }
     }
 });
 
