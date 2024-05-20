@@ -3,15 +3,6 @@ const router = express.Router();
 const Pekan = require('../models/pekan');
 const authMiddleware = require('../middlewares/authmiddleware');
 
-// Helper function to format date
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-}
-
 // Create a Pekan
 router.post('/', authMiddleware, async (req, res) => {
     if (req.user.role !== 'admin') {
@@ -19,10 +10,7 @@ router.post('/', authMiddleware, async (req, res) => {
     }
 
     try {
-        const tanggal_pertama = formatDate(req.body.tanggal_pertama);
-        const tanggal_kedua = formatDate(req.body.tanggal_kedua);
-
-        const pekan = new Pekan({ tanggal_pertama, tanggal_kedua });
+        const pekan = new Pekan(req.body);
         await pekan.save();
         res.status(201).json(pekan);
     } catch (error) {
@@ -60,17 +48,11 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
 
     try {
-        const tanggal_pertama = formatDate(req.body.tanggal_pertama);
-        const tanggal_kedua = formatDate(req.body.tanggal_kedua);
-
         const pekan = await Pekan.findById(req.params.id);
         if (!pekan) {
             return res.status(404).json({ message: 'Pekan not found' });
         }
-        
-        pekan.tanggal_pertama = tanggal_pertama;
-        pekan.tanggal_kedua = tanggal_kedua;
-        
+        Object.assign(pekan, req.body);
         await pekan.save();
         res.json(pekan);
     } catch (error) {
