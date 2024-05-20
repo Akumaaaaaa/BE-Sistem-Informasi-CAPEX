@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const pekanSchema = new mongoose.Schema({
     tanggal_pertama: {
-        type: Date,
+        type: String,
         required: true
     },
     tanggal_kedua: {
-        type: Date,
+        type: String,
         required: true
     }
 });
