@@ -30,6 +30,29 @@ router.post('/', authMiddleware, async (req, res) => {
     }
 });
 
+// Read all Pekan
+router.get('/', authMiddleware, async (req, res) => {
+    try {
+        const pekan = await Pekan.find();
+        res.json(pekan);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Read a single Pekan
+router.get('/:id', authMiddleware, async (req, res) => {
+    try {
+        const pekan = await Pekan.findById(req.params.id);
+        if (!pekan) {
+            return res.status(404).json({ message: 'Pekan not found' });
+        }
+        res.json(pekan);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Update a Pekan
 router.put('/:id', authMiddleware, async (req, res) => {
     if (req.user.role !== 'admin') {
