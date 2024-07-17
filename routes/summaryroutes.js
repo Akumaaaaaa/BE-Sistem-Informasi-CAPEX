@@ -10,6 +10,11 @@ router.post('/', authMiddleware, async (req, res) => {
     }
 
     try {
+        const existingSummary = await Summary.findOne({ title: req.body.title });
+        if (existingSummary) {
+            return res.status(400).json({ message: 'Summary with this title already exists' });
+        }
+
         const summary = new Summary(req.body);
         await summary.save();
         res.status(201).json(summary);
