@@ -8,11 +8,11 @@ This documentation provides an overview of the **Web Service** and **RESTful API
 </p>
  
 ## Table of Contents
-- [Overview](https://github.com/FS-30/BE-Sistem-Informasi-CAPEX.git#overview)
-- [Getting Started](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPEX/.git#getting-started)
+- [Overview](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPEX.git#overview)
+- [Getting Started](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPEX.git#getting-started)
 - [Project Structure](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPEX.git#project-structure)
-- [API Endpoints](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPE.gitX#api-endpoints)
-- [Entity Relationship Diagram](https://github.com/FS-30/03-BE-Eduliterate-Express.git#erd)
+- [API Endpoints](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPEX.git#api-endpoints)
+- [Entity Relationship Diagram](https://github.com/Akumaaaaaa/BE-Sistem-Informasi-CAPEX.git#erd)
 
 <br>
 
