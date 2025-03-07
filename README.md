@@ -1,6 +1,6 @@
 # Capital Expenditure Management - Back End
 
-This documentation provides an overview of the **Web Service** and **RESTful API** implemented in **CAPEX MANAGEMENT  **, built using
+This documentation provides an overview of the **Web Service** and **RESTful API** implemented in **CAPEX MANAGEMENT**, built using
 <p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=mongodb,express,nodejs,postman" />
