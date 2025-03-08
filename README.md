@@ -96,7 +96,7 @@ The project follows a modular structure:
 
 <br>
 
-**Postman Documentation Available here**: 
+**Postman Documentation Available here**: https://documenter.getpostman.com/view/31106938/2sAYdoESmN
 
 <br>
 
